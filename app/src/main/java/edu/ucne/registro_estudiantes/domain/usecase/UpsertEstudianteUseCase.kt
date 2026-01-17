@@ -2,8 +2,9 @@ package edu.ucne.registro_estudiantes.domain.usecase
 
 import edu.ucne.registro_estudiantes.domain.model.Estudiante
 import edu.ucne.registro_estudiantes.domain.repository.EstudianteRepository
+import javax.inject.Inject
 
-class UpsertEstudianteUseCase(
+class UpsertEstudianteUseCase @Inject constructor(
     private val repository: EstudianteRepository
 ) {
     suspend operator fun invoke(estudiante: Estudiante, nombresExistentes: List<String>): Result<Unit> {

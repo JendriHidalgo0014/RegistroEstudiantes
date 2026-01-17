@@ -13,6 +13,5 @@ import edu.ucne.registro_estudiantes.data.local.entities.EstudianteEntity
     exportSchema = false
 )
 abstract class EstudianteDatabase : RoomDatabase(){
-
     abstract fun estudianteDao(): EstudianteDao
 }

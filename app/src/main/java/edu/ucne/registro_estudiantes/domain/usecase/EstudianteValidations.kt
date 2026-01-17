@@ -1,6 +1,6 @@
 package edu.ucne.registro_estudiantes.domain.usecase
 
-data class ValidationResult(
+data class ValidationResult (
     val isValid: Boolean,
     val error: String? = null
 )
