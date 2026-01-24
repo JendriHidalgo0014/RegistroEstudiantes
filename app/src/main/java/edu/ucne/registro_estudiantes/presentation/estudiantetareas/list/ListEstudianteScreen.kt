@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,21 +17,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import edu.ucne.registro_estudiantes.domain.model.Estudiante
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListEstudianteScreen(
     viewModel: ListEstudianteViewModel = hiltViewModel(),
+    onDrawer: () -> Unit,
     onCreate: () -> Unit,
     onEdit: (Int) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
-        viewModel.onEvent(ListEstudianteUiEvent.Load)
-    }
-
     ListEstudianteBody(
         state = state,
+        onDrawer = onDrawer,
         onCreate = onCreate,
         onEdit = onEdit,
         onDelete = { viewModel.onEvent(ListEstudianteUiEvent.Delete(it)) }
@@ -41,6 +39,7 @@ fun ListEstudianteScreen(
 @Composable
 private fun ListEstudianteBody(
     state: ListEstudianteUiState,
+    onDrawer: () -> Unit,
     onCreate: () -> Unit,
     onEdit: (Int) -> Unit,
     onDelete: (Int) -> Unit
@@ -48,7 +47,12 @@ private fun ListEstudianteBody(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Consulta de Estudiante") }
+                title = { Text("Consulta de Estudiante") },
+                navigationIcon = {
+                    IconButton(onClick = onDrawer) {
+                        Icon(Icons.Filled.Menu, contentDescription = "Menú")
+                    }
+                }
             )
         },
         floatingActionButton = {
@@ -116,6 +120,7 @@ private fun ListEstudianteBodyPreview() {
     MaterialTheme {
         ListEstudianteBody(
             state = state,
+            onDrawer = {},
             onCreate = {},
             onEdit = {},
             onDelete = {}

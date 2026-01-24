@@ -6,7 +6,7 @@ import edu.ucne.registro_estudiantes.domain.usecase.asignaturas.validateAula
 import edu.ucne.registro_estudiantes.domain.usecase.asignaturas.validateCodigo
 import edu.ucne.registro_estudiantes.domain.usecase.asignaturas.validateCreditos
 import edu.ucne.registro_estudiantes.domain.usecase.asignaturas.validateNombre
-import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.validateNombreDuplicado
+import edu.ucne.registro_estudiantes.domain.usecase.asignaturas.validateNombreDuplicado
 
 class UpsertAsignaturaUseCase(
     private val repository: AsignaturaRepository
