@@ -1,4 +1,4 @@
-package edu.ucne.registro_estudiantes.presentation.estudiantetareas.list
+package edu.ucne.registro_estudiantes.presentation.tareas.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,30 +15,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import edu.ucne.registro_estudiantes.domain.model.Estudiante
+import edu.ucne.registro_estudiantes.domain.model.Asignatura
 
 @Composable
-fun ListEstudianteScreen(
-    viewModel: ListEstudianteViewModel = hiltViewModel(),
+fun ListAsignaturaScreen(
+    viewModel: ListAsignaturaViewModel = hiltViewModel(),
     onDrawer: () -> Unit,
     onCreate: () -> Unit,
     onEdit: (Int) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    ListEstudianteBody(
+    ListAsignaturaBody(
         state = state,
         onDrawer = onDrawer,
         onCreate = onCreate,
         onEdit = onEdit,
-        onDelete = { viewModel.onEvent(ListEstudianteUiEvent.Delete(it)) }
+        onDelete = { viewModel.onEvent(ListAsignaturaUiEvent.Delete(it)) }
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ListEstudianteBody(
-    state: ListEstudianteUiState,
+private fun ListAsignaturaBody(
+    state: ListAsignaturaUiState,
     onDrawer: () -> Unit,
     onCreate: () -> Unit,
     onEdit: (Int) -> Unit,
@@ -47,7 +47,7 @@ private fun ListEstudianteBody(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Consulta de Estudiante") },
+                title = { Text("Consulta de Asignaturas") },
                 navigationIcon = {
                     IconButton(onClick = onDrawer) {
                         Icon(Icons.Filled.Menu, contentDescription = "Menú")
@@ -72,11 +72,11 @@ private fun ListEstudianteBody(
                 CircularProgressIndicator()
             } else {
                 LazyColumn {
-                    items(state.estudiantes) { estudiante ->
-                        EstudianteCard(
-                            estudiante = estudiante,
-                            onClick = { onEdit(estudiante.estudianteId) },
-                            onDelete = { onDelete(estudiante.estudianteId) }
+                    items(state.asignaturas) { asignatura ->
+                        AsignaturaCard(
+                            asignatura = asignatura,
+                            onClick = { onEdit(asignatura.asignaturaId) },
+                            onDelete = { onDelete(asignatura.asignaturaId) }
                         )
                     }
                 }
@@ -86,8 +86,8 @@ private fun ListEstudianteBody(
 }
 
 @Composable
-private fun EstudianteCard(
-    estudiante: Estudiante,
+private fun AsignaturaCard(
+    asignatura: Asignatura,
     onClick: () -> Unit,
     onDelete: () -> Unit
 ) {
@@ -104,9 +104,10 @@ private fun EstudianteCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(estudiante.nombres, style = MaterialTheme.typography.titleMedium)
-                Text("Email: ${estudiante.email}")
-                Text("Edad: ${estudiante.edad}")
+                Text(asignatura.nombre, style = MaterialTheme.typography.titleMedium)
+                Text("Código: ${asignatura.codigo}")
+                Text("Aula: ${asignatura.aula}")
+                Text("Créditos: ${asignatura.creditos}")
             }
             TextButton(onClick = { onDelete() }) { Text("Eliminar") }
         }
@@ -115,10 +116,10 @@ private fun EstudianteCard(
 
 @Preview
 @Composable
-private fun ListEstudianteBodyPreview() {
-    val state = ListEstudianteUiState()
+private fun ListAsignaturaBodyPreview() {
+    val state = ListAsignaturaUiState()
     MaterialTheme {
-        ListEstudianteBody(
+        ListAsignaturaBody(
             state = state,
             onDrawer = {},
             onCreate = {},
