@@ -1,11 +1,12 @@
 package edu.ucne.registro_estudiantes.data.local.dao
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import edu.ucne.registro_estudiantes.data.local.entities.AsignaturaEntity
 import kotlinx.coroutines.flow.Flow
-
+@Dao
 interface AsignaturaDao {
     @Query("SELECT * FROM asignaturas ORDER BY asignaturaId DESC")
     fun observeAll(): Flow<List<AsignaturaEntity>>
