@@ -12,6 +12,8 @@ import edu.ucne.registro_estudiantes.presentation.estudiantetareas.edit.EditEstu
 import edu.ucne.registro_estudiantes.presentation.estudiantetareas.list.ListEstudianteScreen
 import edu.ucne.registro_estudiantes.presentation.tareas.edit.EditAsignaturaScreen
 import edu.ucne.registro_estudiantes.presentation.tareas.list.ListAsignaturaScreen
+import edu.ucne.registro_estudiantes.presentation.tipoPenalidadtareas.edit.EditTipoPenalidadScreen
+import edu.ucne.registro_estudiantes.presentation.tipoPenalidadtareas.list.ListTipoPenalidadScreen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -80,6 +82,37 @@ fun RegistroNavHost(
                 val args = it.toRoute<Screen.AsignaturaEdit>()
                 EditAsignaturaScreen(
                     asignaturaId = if (args.asignaturaId == 0) null else args.asignaturaId,
+                    onDrawer = {
+                        scope.launch {
+                            drawerState.open()
+                        }
+                    },
+                    goBack = {
+                        navHostController.navigateUp()
+                    }
+                )
+            }
+
+            composable<Screen.TipoPenalidadList> {
+                ListTipoPenalidadScreen(
+                    onDrawer = {
+                        scope.launch {
+                            drawerState.open()
+                        }
+                    },
+                    onCreate = {
+                        navHostController.navigate(Screen.TipoPenalidadEdit(0))
+                    },
+                    onEdit = { tipoId ->
+                        navHostController.navigate(Screen.TipoPenalidadEdit(tipoId))
+                    }
+                )
+            }
+
+            composable<Screen.TipoPenalidadEdit> {
+                val args = it.toRoute<Screen.TipoPenalidadEdit>()
+                EditTipoPenalidadScreen(
+                    tipoId = if (args.tipoId == 0) null else args.tipoId,
                     onDrawer = {
                         scope.launch {
                             drawerState.open()
