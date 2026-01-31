@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import edu.ucne.registro_estudiantes.domain.model.Estudiante
+import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.DeleteEstudianteUseCase
 import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.GetEstudianteUseCase
 import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.GetEstudiantesUseCase
 import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.UpsertEstudianteUseCase
-import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.DeleteEstudianteUseCase
-import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.validateNombres
-import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.validateEmail
 import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.validateEdad
+import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.validateEmail
+import edu.ucne.registro_estudiantes.domain.usecase.estudiantes.validateNombres
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
