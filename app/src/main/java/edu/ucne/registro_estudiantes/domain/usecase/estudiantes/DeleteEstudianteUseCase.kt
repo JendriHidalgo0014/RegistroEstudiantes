@@ -1,4 +1,4 @@
-package edu.ucne.registro_estudiantes.domain.usecase
+package edu.ucne.registro_estudiantes.domain.usecase.estudiantes
 
 import edu.ucne.registro_estudiantes.domain.repository.EstudianteRepository
 
